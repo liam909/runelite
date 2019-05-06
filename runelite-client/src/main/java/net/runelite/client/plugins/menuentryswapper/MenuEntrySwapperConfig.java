@@ -302,4 +302,11 @@ public interface MenuEntrySwapperConfig extends Config
 	{
 		return true;
 	}
+
+	@ConfigItem(
+			keyName = "swapBuildingDoor",
+			name = "Swap Construction Door",
+			description = "Swap construction door"
+	)
+	default boolean swapBuildingDoor() { return true; }
 }

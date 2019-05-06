@@ -475,6 +475,10 @@ public class MenuEntrySwapperPlugin extends Plugin
 		{
 			swap("harpoon", option, target, true);
 		}
+
+		else if (config.swapBuildingDoor() && option.equalsIgnoreCase("open") && target.toLowerCase().contains("door")) {
+			stripExceptFor("remove");
+		}
 		
 		else if (config.swapHomePortal() != HouseMode.ENTER && option.equals("enter"))
 		{
@@ -649,6 +653,19 @@ public class MenuEntrySwapperPlugin extends Plugin
 
 		return -1;
 	}
+
+	private void stripExceptFor(String option) {
+		MenuEntry[] currentEntries = client.getMenuEntries();
+		MenuEntry[] newEntries = new MenuEntry[1];
+
+		for (MenuEntry entry : currentEntries)
+			if (entry.getOption().equalsIgnoreCase(option))
+				newEntries[0] = entry;
+
+		if (newEntries[0] != null)
+			client.setMenuEntries(newEntries);
+	}
+
 
 	private void swap(String optionA, String optionB, String target, boolean strict)
 	{
